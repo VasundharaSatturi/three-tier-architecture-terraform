@@ -85,3 +85,4 @@ resource "aws_autoscaling_attachment" "tg_attach" {
   autoscaling_group_name = aws_autoscaling_group.asg.id
   lb_target_group_arn    = aws_lb_target_group.target_group.arn
 }
+#added a comment
