@@ -84,3 +84,8 @@ variable "lb_sg_id" {
     description = "Load balancer sg id"
     type        = string
 }
+
+variable "user_data" {
+  description = "The user data script for the launch template"
+  type = string
+}

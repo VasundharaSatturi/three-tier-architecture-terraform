@@ -1,12 +1,15 @@
 resource "aws_launch_template" "lt" {
   name = "${var.project_name}-${var.tier}-launch-template"
 
-  image_id             = var.custom_ami_id  # Specify your custom AMI ID
-  instance_type        = var.instance_type  # e.g., "t3.micro"
-  vpc_security_group_ids   = [var.app_tier_sg_id]  # Attach the app tier SG
+  image_id          = var.custom_ami_id  # Specify your custom AMI ID
+  instance_type     = var.instance_type  # e.g., "t3.micro"
+  vpc_security_group_ids = [var.app_tier_sg_id]  # Attach the app tier SG
+
   iam_instance_profile {
     arn = var.ec2_instance_profile_arn
   }
+
+  user_data = base64encode(var.user_data)
 
   lifecycle {
     create_before_destroy = true

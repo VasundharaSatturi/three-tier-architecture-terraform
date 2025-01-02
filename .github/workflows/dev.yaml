@@ -1,0 +1,55 @@
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - environments/dev/**
+  pull_request:
+    branches:
+    - main
+    paths:
+    - environments/dev/**
+    
+env:
+# verbosity setting for Terraform logs
+  TF_LOG: INFO
+# Credentials for deployment to AWS
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+# S3 bucket for the Terraform state
+  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
+    
+jobs:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v3
+        
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+    
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+    
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: true
+    
+    - run: echo ${{ steps.plan.outputs.stdout }}
+    - run: echo ${{ steps.plan.outputs.stderr }}
+    - run: echo ${{ steps.plan.outputs.exitcode }}
+       

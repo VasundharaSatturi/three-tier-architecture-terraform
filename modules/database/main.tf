@@ -19,16 +19,13 @@ resource "aws_rds_cluster" "aurora" {
   database_name           = var.database_name
   backup_retention_period = var.backup_retention_period
   preferred_backup_window = var.preferred_backup_window
+  skip_final_snapshot     = true
 
   vpc_security_group_ids  = var.security_group_ids
   db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name
 
   storage_encrypted       = true
   apply_immediately       = true
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_rds_cluster_instance" "aurora_instances" {

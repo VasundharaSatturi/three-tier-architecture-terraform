@@ -46,6 +46,7 @@ module "ec2_autoscaling" {
   ingress_protocol         = "HTTP"
   internal                 = true
   lb_sg_id                 = module.security_groups.internal_alb_sg_id
+  user_data                = file("${path.module}/app-tier-user-data.sh")
 }
 
 module "ec2_autoscaling_2" {
@@ -64,4 +65,5 @@ module "ec2_autoscaling_2" {
   ingress_protocol         = "HTTP"
   internal                 = false
   lb_sg_id                 = module.security_groups.internet_alb_sg_id
+  user_data                = file("${path.module}/web-tier-user-data.sh")
 }

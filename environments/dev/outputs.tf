@@ -32,3 +32,7 @@ output "public_lb_dns_name" {
 }
 
 
+output "rds_endpoint" {
+  description = "DNS endpoint of Aurora DB"
+  value       = module.aurora_db.db_cluster_endpoint
+}
