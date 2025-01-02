@@ -30,6 +30,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v3
+    - name: Changing directory to dev directory
+      run: cd environments/dev/
         
     - name: Terraform fmt
       id: fmt
