@@ -30,24 +30,28 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v3
-    - name: Changing directory to dev directory
-      run: cd environments/dev/
+    - name: List files in dev directory
+        run: ls -lsa environments/dev/
         
     - name: Terraform fmt
       id: fmt
+      working-directory: environments/dev
       run: terraform fmt -check
       continue-on-error: true
 
     - name: Terraform Init
+      working-directory: environments/dev
       id: init
       run: terraform init
     
     - name: Terraform Validate
       id: validate
+      working-directory: environments/dev
       run: terraform validate -no-color
     
     - name: Terraform Plan
       id: plan
+      working-directory: environments/dev
       run: terraform plan -no-color
       continue-on-error: true
     
