@@ -50,6 +50,7 @@ module "ec2_autoscaling" {
   user_data                = file("${path.module}/app-tier-user-data.sh")
 }
 
+#Create web tier compute components
 module "ec2_autoscaling_2" {
   source = "../../modules/compute"
 
