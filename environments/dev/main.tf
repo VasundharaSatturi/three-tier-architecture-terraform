@@ -30,7 +30,7 @@ module "aurora_db" {
   instance_class      = var.db_instance_class
 }
 
-#Create App tier compute components
+#Create App tier compute components 
 module "ec2_autoscaling" {
   source = "../../modules/compute"
 
@@ -50,7 +50,7 @@ module "ec2_autoscaling" {
   user_data                = file("${path.module}/app-tier-user-data.sh")
 }
 
-#Create web tier compute components
+#Create web tier compute components 
 module "ec2_autoscaling_2" {
   source = "../../modules/compute"
 
