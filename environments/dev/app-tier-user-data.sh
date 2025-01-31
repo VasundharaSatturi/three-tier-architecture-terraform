@@ -36,7 +36,7 @@ pm2 start index.js
 pm2 list
 pm2 startup | bash
 
-# Test the application
+# Test the applications
 curl http://localhost:4000/health
 
 EOF
