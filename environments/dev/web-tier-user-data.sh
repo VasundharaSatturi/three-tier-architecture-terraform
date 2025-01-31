@@ -3,7 +3,7 @@
 # Switch to ec2-user
 sudo su ec2-user <<'EOF'
 
-# Install NVM and set up Node.js environment
+# Install NVM and set up Node.js environments
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 source ~/.bashrc
 nvm install 16
