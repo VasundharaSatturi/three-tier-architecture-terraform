@@ -12,7 +12,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "dev-3-tier-tf-state-bucket-mumbai"
+    bucket = "dev-3-tier-tf-state-bucket-mumba"
     key    = "dev/terraform.tfstate"
     region = "ap-south-1"
     dynamodb_table = "dev-3-tier-tf-lock-table"
